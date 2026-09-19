@@ -26,6 +26,36 @@ function fillFilters(){
  const uniq=k=>[...new Set(D.map(r=>String(val(r,k)).trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
  fillSelect('tipo',uniq('TIPO'));fillSelect('lado',uniq('LADO'));updateSolutions();renderTrechoTabs();
 }
+function renderTrechoTabs(){
+  const box=$('trechoTabs');
+  if(!box)return;
+  const tabs=[
+    {key:'A',label:'3A',lo:62,hi:76},
+    {key:'B',label:'3B',lo:76,hi:83.5},
+    {key:'C',label:'3C',lo:83.5,hi:91.3},
+    {key:'D',label:'3D',lo:91.3,hi:105}
+  ];
+  box.innerHTML='';
+  tabs.forEach(t=>{
+    const b=document.createElement('button');
+    b.type='button';
+    b.className='trechoTab'+(window.ACTIVE_TRECHO===t.key?' active':'');
+    b.innerHTML='<b>'+t.label+'</b><span>'+fmt(t.lo)+' — '+fmt(t.hi)+'</span>';
+    b.onclick=()=>{
+      window.ACTIVE_TRECHO=t.key;
+      lo=t.lo; hi=t.hi;
+      $('r1').value=lo; $('r2').value=hi;
+      apply();
+    };
+    box.appendChild(b);
+  });
+  const title=$('graphTitle');
+  if(title){
+    const t=tabs.find(x=>x.key===window.ACTIVE_TRECHO);
+    title.textContent=t?('Trecho '+t.label):'Distribuição das frentes';
+  }
+}
+
 function updateSolutions(){const type=$('tipo').value;let arr=D.filter(r=>!type||String(val(r,'TIPO')).trim()===type).map(r=>String(val(r,'SOLUÇÃO')).trim()).filter(x=>x&&x!=='-');arr=[...new Set(arr)].sort((a,b)=>a.localeCompare(b,'pt-BR'));let old=$('solucao').value;fillSelect('solucao',arr);if(arr.includes(old))$('solucao').value=old}
 function apply(){
  const tr=window.ACTIVE_TRECHO||'',tp=$('tipo').value,ld=$('lado').value,so=$('solucao').value;
