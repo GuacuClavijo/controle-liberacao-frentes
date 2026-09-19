@@ -43,3 +43,54 @@ h1{font-size:22px;margin:0}.sub{opacity:.82;font-size:12px;margin-top:3px}main{p
   .lane.ld{bottom:4px}
   .release-uncovered,.release-green{top:32px;height:100px}
 }
+
+/* V7 - eixo KM legível e posicionamento real das frentes */
+.kmRulerLine{
+  position:absolute;left:0;right:0;top:14px;height:3px;
+  background:#102a43;border-radius:3px;
+}
+.tick{
+  top:0;height:31px;border-left:2px solid #102a43;
+  z-index:5;
+}
+.tick span{
+  top:16px;left:5px;font-size:12px;line-height:14px;
+  color:#102a43;font-weight:800;background:#fff;padding:0 2px;
+}
+.item{left:auto}
+.lane .item{z-index:10}
+
+/* V8 - filtros compactos, faixas aproximadas ao eixo e tabela na ordem solicitada */
+.filterCard{padding:8px 10px}
+.filters{grid-template-columns:1fr 1fr 1.25fr .7fr 1.55fr auto;gap:5px}
+.filters label{margin-bottom:3px}
+.filters select,.statusFilter,.statusBtn,.clearBtn{height:34px}
+.statusFilter{min-height:34px;gap:2px}
+.statusBtn{font-size:11px;padding:0 7px}
+.clearBtn{padding:0 11px}
+.axis{height:400px}
+.mainline{top:200px}
+.lane{height:130px}
+.lane.le{top:4px}
+.lane.ld{bottom:4px}
+.release-uncovered,.release-green{top:27px;height:76px}
+.lane .item{top:38px!important;height:15px}
+.tick{top:185px;height:31px}
+.tick span{top:16px;font-size:12px;background:#fff}
+.centerItem{top:193px!important;height:15px}
+.kmRulerLine{top:14px}
+@media(max-width:900px){.filters{grid-template-columns:repeat(6,minmax(0,1fr))}.filters>div:nth-child(3){grid-column:span 2}}
+@media(max-width:700px){
+ .filters{grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+ .filters>div:nth-child(1){grid-column:span 1}.filters>div:nth-child(2){grid-column:span 1}
+ .filters>div:nth-child(3){grid-column:span 2}.filters>div:nth-child(4){grid-column:span 1}
+ .releaseBox{grid-column:span 1}.clearBtn{width:100%;font-size:11px}
+ .statusBtn{font-size:9px;padding:0 3px}
+ .axis{height:360px}
+ .mainline{top:180px}
+ .lane{height:112px}
+ .release-uncovered,.release-green{top:24px;height:64px}
+ .lane .item{top:31px!important;height:14px}
+ .tick{top:165px}.centerItem{top:173px!important}
+ .tick span{font-size:11px}
+}
